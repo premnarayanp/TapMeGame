@@ -1,0 +1,88 @@
+/* src/TapMeGame.css */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url("../assets/background.jpg");
+}
+
+.coin-counter {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.coin-button {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin-top: 100px;
+    /* background-color: #ffd700;
+    background-color: white; */
+    display: flex;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.05s ease;
+    padding: 0;
+}
+
+.coin-button span {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    align-items: center;
+    z-index: 200;
+}
+
+
+/* 
+.coin-image {
+    height: 100px;
+    width: 100px;
+} */
+
+.coin-image {
+    height: 80%;
+    width: 80%;
+    border-radius: 100%;
+    /* border-radius: 50px; */
+}
+
+.coin-button:active {
+    animation: button-press 0.05s ease;
+}
+
+@keyframes button-press {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0.95);
+    }
+}
+
+.click-coin-animation {
+    position: absolute;
+    font-size: 20px;
+    animation: fly-to-counter 3s forwards;
+}
+
+@keyframes fly-to-counter {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        top: -100px;
+        left: 10px;
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5);
+    }
+}
