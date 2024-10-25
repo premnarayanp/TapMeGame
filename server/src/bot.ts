@@ -17,7 +17,9 @@ export function initTelegramBot() {
         }
 
         const telegramId = msg.from.id;
+        // console.log("-telegramId=", telegramId);
         const userName = msg.from.username;
+        const gameUrl = `https://premnarayanp.github.io/chat-app?username=${userName}&telegramId=${telegramId}`;
 
         try {
             // Check if the user is already in the Supabase DB
@@ -41,6 +43,7 @@ export function initTelegramBot() {
                         {
                             telegramId: telegramId,
                             userName: userName,
+                            balance: 0
                         },
                     ]);
 
@@ -51,7 +54,7 @@ export function initTelegramBot() {
 
 
 
-                const gameUrl = `https://premnarayanp.github.io/chat-app?username=${userName}&userId=${telegramId}`;
+                //const gameUrl = `https://premnarayanp.github.io/chat-app?username=${userName}&userId=${telegramId}`;
                 await bot.sendMessage(chatId, `Welcome, ${userName}! Click the button below to start the game.`, {
                     reply_markup: {
                         inline_keyboard: [
@@ -67,7 +70,7 @@ export function initTelegramBot() {
                     reply_markup: {
                         inline_keyboard: [
                             [
-                                { text: 'Play Game', web_app: { url: 'https://premnarayanp.github.io/chat-app/' } }
+                                { text: 'Play Game', web_app: { url: gameUrl } }
                             ]
                         ]
                     }
