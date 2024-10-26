@@ -1,16 +1,27 @@
 // src/TapMeGame.tsx
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { UPDATE_BALANCE } from '../graphQL/queries';
+
 import '../styles/TapMeGame.css';
 import { ProgressBar } from "../components/index";
 
-const TapMeGame: React.FC = () => {
-    const [coins, setCoins] = useState<number>(0);
+interface TapMeGameProps {
+    initialBalance: number;
+    userId: string
+}
+
+
+const TapMeGame: React.FC<TapMeGameProps> = ({ initialBalance, userId }) => {
+    const [coins, setCoins] = useState(initialBalance);
     const [clicks, setClicks] = useState<{ x: number; y: number; id: number }[]>([]);
     const [burn, setBurn] = useState<number>(1000); // Start burn counter at 1000
 
     const targetCoins = 1000; // Target for the progress bar
+    // Mutation to update the balance
+    const [updateBalance] = useMutation(UPDATE_BALANCE);
 
-    const handleCoinClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleCoinClick = async (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left - 50;
         const y = e.clientY - rect.top + 100;
@@ -21,6 +32,14 @@ const TapMeGame: React.FC = () => {
             setCoins((prevCoins) => prevCoins + 1);
             setClicks((prevClicks) => [...prevClicks, { x, y, id: Date.now() }]);
             setBurn((prevBurn) => prevBurn - 1);
+
+            // Update the balance in the backend
+            await updateBalance({
+                variables: {
+                    userId: userId,
+                    newBalance: coins + 1,
+                },
+            });
         }
         // setCoins((prevCoins) => prevCoins + 1);
         // setClicks((prevClicks) => [...prevClicks, { x, y, id: Date.now() }]);

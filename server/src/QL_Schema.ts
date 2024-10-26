@@ -11,7 +11,7 @@ const typeDefs = `
   }
 
   type Query {
-    getBalanceById(telegramId: ID!): User
+    getBalanceById(telegramId: String!): User
   }
 
   type Mutation {
