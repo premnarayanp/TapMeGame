@@ -17,6 +17,8 @@ const TapMeGame: React.FC<TapMeGameProps> = ({ initialBalance, userId }) => {
     const [burn, setBurn] = useState<number>(1000); // Start burn counter at 1000
     const targetCoins = 1000; // Target for the progress bar
 
+    // console.log("-------------Test rendering-------------");
+
     // Mutation to update the balance
     const [updateBalance] = useMutation(UPDATE_BALANCE);
 
