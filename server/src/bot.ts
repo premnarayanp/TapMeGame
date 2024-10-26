@@ -19,7 +19,7 @@ export function initTelegramBot() {
         const telegramId = msg.from.id;
         // console.log("-telegramId=", telegramId);
         const userName = msg.from.username;
-        const gameUrl = `https://premnarayanp.github.io/chat-app?username=${userName}&telegramId=${telegramId}`;
+        const gameUrl = `https://bucolic-centaur-38bb0c.netlify.app?username=${userName}&telegramId=${telegramId}`;
 
         try {
             // Check if the user is already in the Supabase DB
@@ -53,8 +53,6 @@ export function initTelegramBot() {
                 }
 
 
-
-                //const gameUrl = `https://premnarayanp.github.io/chat-app?username=${userName}&userId=${telegramId}`;
                 await bot.sendMessage(chatId, `Welcome, ${userName}! Click the button below to start the game.`, {
                     reply_markup: {
                         inline_keyboard: [
